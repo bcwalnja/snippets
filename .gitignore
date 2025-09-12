@@ -1,0 +1,36 @@
+# Dependency directories (if using npm/yarn)
+node_modules/
+
+# Build output
+dist/
+build/
+
+# VS Code workspace settings
+.vscode/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Logs and temp files
+*.log
+*.tmp
+
+# Environment variables
+.env
+.env.*
+
+# Cache and lock files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Optional: Ignore test coverage and reports
+coverage/
+*.lcov
+
+# Optional: Ignore generated assets
+*.min.js
+*.map

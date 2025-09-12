@@ -1,2 +1,4 @@
-# snippets
-Add phrases that you commonly use. Click copy to put them onto the clipboard.
+## Snippets
+
+Snippets is a web app for storing and copying commonly used phrases. Click the copy button to put the phrase onto the clipboard.
+> Data is saved locally in your browser cache.
