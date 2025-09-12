@@ -50,6 +50,7 @@ comment out borders for production
 
 header {
     grid-area: header;
+    padding: 16px;
 }
 
 nav {
@@ -78,7 +79,6 @@ footer {
 
 .card {
     width: clamp(350px, 100%, 500px);
-    max-height: 175px;
     border: 1px solid gray;
     border-radius: 12px;
     display: flex;
@@ -86,25 +86,26 @@ footer {
     padding: 8px;
 }
 
-.card-title {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 8px;
-}
-
-.card-title img {
-    height: 100%;
-}
-
-.card .copy {
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
 footer {
     padding: 16px;
     border-top: 1px solid gray;
+}
+
+.card-title * {
+    display: block;
+}
+
+.card-title {
+    display: flex;
+    flex-direction: row;
+}
+
+.card-title .title {
+    flex: 1;
+}
+
+.card-title img {
+    height: 1rem;
 }
 
 #new-card-form {
@@ -112,7 +113,7 @@ footer {
     gap: 8px;
 }
 
-#new-card-form > * {
+#new-card-form>* {
     padding: 8px;
     border: 1px solid gray;
     background: var(--bg);
@@ -124,6 +125,8 @@ footer {
     flex: 1;
 }
 
-#new-card-form button {
+button {
     cursor: pointer;
+    background: none;
+    border: none;
 }

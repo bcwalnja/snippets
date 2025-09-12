@@ -1,0 +1,72 @@
+function createCard(title, content) {
+    const cardTitle = document.createElement("div");
+    cardTitle.className = "card-title";
+    cardTitle.appendChild(createTitle(title));
+    cardTitle.appendChild(createCopyButton(content));
+    cardTitle.appendChild(createDeleteButton(title, content));
+    const card = document.createElement("div");
+    card.className = "card";
+    card.appendChild(cardTitle);
+    const cardContent = document.createElement("p");
+    cardContent.textContent = content;
+    card.appendChild(cardContent);
+    return card;
+}
+
+function createTitle(title) {
+    const titleElement = document.createElement("span");
+    titleElement.className = "title";
+    titleElement.textContent = title;
+    return titleElement;
+}
+
+function createCopyButton(content) {
+    const copyBtn = document.createElement("button");
+    copyBtn.className = "copy";
+    copyBtn.innerHTML = `<img src="./icons/clip.svg" alt="Copy" />`;
+    copyBtn.addEventListener("click", () => {
+        navigator.clipboard.writeText(content).catch(console.error);
+    });
+    return copyBtn;
+}
+
+function createDeleteButton(title, content) {
+    const deleteBtn = document.createElement("button");
+    deleteBtn.className = "delete";
+    deleteBtn.innerHTML = `🗑️`;
+    deleteBtn.addEventListener("click", () => {
+        const cached = localStorage.getItem("snippets");
+        const snippets = cached ? JSON.parse(cached) : [];
+        const updatedSnippets = snippets.filter(snippet => snippet.title !== title || snippet.content !== content);
+        localStorage.setItem("snippets", JSON.stringify(updatedSnippets));
+        location.reload();
+    });
+    return deleteBtn;
+}
+
+const cached = localStorage.getItem("snippets");
+const snippets = cached ? JSON.parse(cached) : [];
+
+const container = document.querySelector(".container");
+
+snippets.forEach(({ title, content }) => {
+    const card = createCard(title, content);
+    container.appendChild(card);
+});
+
+document.getElementById("new-card-form").addEventListener("submit", e => {
+    e.preventDefault();
+    const form = e.target;
+    const title = form.title.value.trim();
+    const content = form.content.value.trim();
+
+    if (!title || !content) return;
+
+    const newSnippet = { title, content };
+    const cached = localStorage.getItem("snippets");
+    const snippets = cached ? JSON.parse(cached) : [];
+
+    snippets.push(newSnippet);
+    localStorage.setItem("snippets", JSON.stringify(snippets));
+    location.reload();
+});
