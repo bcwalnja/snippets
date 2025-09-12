@@ -35,6 +35,8 @@ function createDeleteButton(title, content) {
     deleteBtn.className = "delete";
     deleteBtn.innerHTML = `🗑️`;
     deleteBtn.addEventListener("click", () => {
+        // alert
+        if (!confirm(`Are you sure you want to delete the snippet "${title}"?`)) return;
         const cached = localStorage.getItem("snippets");
         const snippets = cached ? JSON.parse(cached) : [];
         const updatedSnippets = snippets.filter(snippet => snippet.title !== title || snippet.content !== content);
