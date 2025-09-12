@@ -47,6 +47,12 @@ function createDeleteButton(title, content) {
 }
 
 const cached = localStorage.getItem("snippets");
+if (!cached || JSON.parse(cached).length === 0) {
+    const message = "No snippets were found in the cache. Use the controls in the footer to add some.";
+    const defaultSnippet = { title: "Welcome!", content: message };
+    localStorage.setItem("snippets", JSON.stringify([defaultSnippet]));
+    location.reload();
+}
 const snippets = cached ? JSON.parse(cached) : [];
 
 const container = document.querySelector(".container");
