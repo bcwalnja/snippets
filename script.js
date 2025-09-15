@@ -7,7 +7,7 @@ function createCard(id, title, content) {
     card.className = "card";
 
     const cardTitle = document.createElement("div");
-    cardTitle.className = "card-title";
+    cardTitle.className = "card-title-row";
 
     const titleEl = createTitle(title);
     const copyBtn = createCopyButton(content);
@@ -17,6 +17,7 @@ function createCard(id, title, content) {
     card.appendChild(cardTitle);
 
     const cardContent = document.createElement("p");
+    cardContent.className = "content";
     cardContent.textContent = content;
     card.appendChild(cardContent);
 

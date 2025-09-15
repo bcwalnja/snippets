@@ -16,19 +16,24 @@
     cursor: pointer;
 }
 
-.card-title * {
+.card-title-row * {
     display: block;
 }
 
-.card-title {
+.card-title-row {
     display: flex;
     flex-direction: row;
 }
 
-.card-title .title {
+.card-title-row .title {
     flex: 1;
+    font-weight: bold;
 }
 
-.card-title img {
+.card-title-row img {
     height: 1rem;
+}
+
+.card .content {
+    font-size: 0.85rem;
 }
