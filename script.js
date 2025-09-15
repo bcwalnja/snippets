@@ -3,19 +3,32 @@ function createId() {
 }
 
 function createCard(id, title, content) {
-    const cardTitle = document.createElement("div");
-    cardTitle.className = "card-title";
-    cardTitle.appendChild(createTitle(title));
-    cardTitle.appendChild(createCopyButton(content));
-    cardTitle.appendChild(createDeleteButton(title, id));
     const card = document.createElement("div");
     card.className = "card";
+
+    const cardTitle = document.createElement("div");
+    cardTitle.className = "card-title";
+
+    const titleEl = createTitle(title);
+    const copyBtn = createCopyButton(content);
+    const deleteBtn = createDeleteButton(title, id);
+
+    cardTitle.append(titleEl, copyBtn, deleteBtn);
     card.appendChild(cardTitle);
+
     const cardContent = document.createElement("p");
     cardContent.textContent = content;
     card.appendChild(cardContent);
+
+    card.addEventListener("click", e => {
+        if (!e.target.closest(".delete")) {
+            navigator.clipboard.writeText(content).catch(console.error);
+        }
+    });
+
     return card;
 }
+
 
 function createTitle(title) {
     const titleElement = document.createElement("span");
@@ -49,20 +62,17 @@ function createDeleteButton(title, id) {
     return deleteBtn;
 }
 
-const cached = localStorage.getItem("snippets");
-if (!cached || JSON.parse(cached).length === 0) {
-    const message = "No snippets were found in the cache. Use the controls in the footer to add some.";
-    const defaultSnippet = { id: createId(), title: "Welcome!", content: message };
-    localStorage.setItem("snippets", JSON.stringify([defaultSnippet]));
-    location.reload();
-}
-const snippets = cached ? JSON.parse(cached) : [];
+function loadCards() {
+    if (JSON.parse(localStorage.getItem("snippets"))?.length === 0) {
+        const message = "No snippets were found in the cache. Use the controls in the footer to add some.";
+        const defaultSnippet = { id: createId(), title: "Welcome!", content: message };
+        localStorage.setItem("snippets", JSON.stringify([defaultSnippet]));
+    }
 
-const container = document.querySelector(".container");
-snippets.forEach(({ id, title, content }) => {
-    const card = createCard(id, title, content);
-    container.appendChild(card);
-});
+    refreshCards();
+}
+
+loadCards();
 
 document.getElementById("new-card-form").addEventListener("submit", e => {
     e.preventDefault();
@@ -70,10 +80,24 @@ document.getElementById("new-card-form").addEventListener("submit", e => {
     const title = form.title.value.trim();
     const content = form.content.value.trim();
     if (!title || !content) return;
+    const snippets = JSON.parse(localStorage.getItem("snippets")) || [];
     const newSnippet = { id: createId(), title, content };
-    const cached = localStorage.getItem("snippets");
-    const snippets = cached ? JSON.parse(cached) : [];
     snippets.push(newSnippet);
     localStorage.setItem("snippets", JSON.stringify(snippets));
-    location.reload();
+    refreshCards();
+
+    // also clear the title and content inputs
+    form.title.value = "";
+    form.content.value = "";
 });
+
+function refreshCards() {
+    const container = document.querySelector(".container");
+    container.innerHTML = "";
+    const cached = localStorage.getItem("snippets");
+    const snippets = cached ? JSON.parse(cached) : [];
+    snippets.forEach(({ id, title, content }) => {
+        const card = createCard(id, title, content);
+        container.appendChild(card);
+    });
+}

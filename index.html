@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Snippets</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" sizes="48x48" href="icons/clip-48.png">
+    <link rel="stylesheet" href="./styles/styles.css">
+    <link rel="stylesheet" href="./styles/card.css">
+    <link rel="stylesheet" href="./styles/footer.css">
 </head>
 
 <body>
@@ -13,19 +16,21 @@
             <header>The Snippets App</header>
             <nav></nav>
             <main>
-                
+
                 <div class="container">
-                    
+
                 </div>
 
             </main>
             <aside></aside>
             <footer>
-                <form id="new-card-form">
-                    <input type="text" name="title" placeholder="Title" required />
-                    <input type="text" name="content" placeholder="Content" required />
-                    <button type="submit">Add Snippet</button>
-                </form>
+                <div class="footer-wrapper">
+                    <form id="new-card-form">
+                        <input class="title" type="text" name="title" placeholder="Title" required />
+                        <input class="content" type="text" name="content" placeholder="Content" required />
+                        <button type="submit">Add Snippet</button>
+                    </form>
+                </div>
             </footer>
 
         </div>

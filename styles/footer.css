@@ -1,0 +1,33 @@
+.footer-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#new-card-form {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1 auto;
+    gap: 8px;
+    width: max(100px, 100%);
+}
+
+#new-card-form>* {
+    padding: 8px;
+    border: 1px solid gray;
+    background: var(--bg);
+    color: var(--fg);
+    border-radius: 4px;
+}
+
+#new-card-form .title {
+    flex: 1;
+}
+
+#new-card-form .content {
+    flex: 2;
+}
+
+#new-card-form button {
+    width: max-content;
+}
