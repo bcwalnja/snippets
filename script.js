@@ -21,6 +21,12 @@ function createCard(id, title, content) {
     cardContent.textContent = content;
     card.appendChild(cardContent);
 
+    requestAnimationFrame(() => {
+        if (cardContent.scrollHeight > cardContent.clientHeight) {
+            card.classList.add("fade");
+        }
+    });
+
     card.addEventListener("click", e => {
         if (!e.target.closest(".delete")) {
             navigator.clipboard.writeText(content).catch(console.error);

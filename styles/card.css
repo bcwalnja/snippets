@@ -47,7 +47,7 @@
     position: relative;
 }
 
-.card .content::after {
+.card.fade .content::after {
     content: "";
     position: absolute;
     bottom: 20px;
