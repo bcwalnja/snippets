@@ -18,14 +18,20 @@
     background: var(--bg);
     color: var(--fg);
     border-radius: 4px;
+    font: inherit;
 }
 
 #new-card-form .title {
     flex: 1;
+    min-width: min(10rem, 100%);
+    height: 3rem;
+    padding-bottom: calc(3rem - 1lh - 10px);
 }
 
 #new-card-form .content {
     flex: 2;
+    min-width: min(15rem, 100%);
+    height: 3rem;
 }
 
 #new-card-form button {

@@ -1,13 +1,13 @@
 .container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
     gap: 16px;
     padding: 16px;
     justify-items: center;
 }
 
 .card {
-    width: clamp(250px, 100%, 500px);
+    width: min(100%, 500px);
     border: 1px solid gray;
     border-radius: 12px;
     display: flex;
@@ -28,6 +28,10 @@
 .card-title-row .title {
     flex: 1;
     font-weight: bold;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .card-title-row img {
@@ -55,4 +59,29 @@
     right: 0;
     height: 40px;
     background: linear-gradient(to bottom, transparent, var(--bg));
+}
+
+@media (max-width: 400px) {
+    .container {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 8px;
+        padding: 8px;
+    }
+
+    .card {
+        font-size: 0.85rem;
+        padding: 4px 8px;
+    }
+
+    .card button {
+        font-size: inherit;
+    }
+
+    .card-title-row img {
+        height: 0.85rem;
+    }
+
+    .card .content {
+        display: none;
+    }
 }
