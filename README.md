@@ -1,6 +1,6 @@
-## Snippets
+## [Snippets](https://bcwalnja.github.io/snippets)
 
-Snippets is a web app for storing and copying commonly used phrases. Click the copy button to put the phrase onto the clipboard.
+[Snippets](https://bcwalnja.github.io/snippets) is a web app for storing and copying commonly used text. Click the copy button to put the text onto the clipboard.
 
 
 > Note:
