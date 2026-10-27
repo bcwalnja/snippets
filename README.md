@@ -6,3 +6,5 @@ Snippets is a web app for storing and copying commonly used phrases. Click the c
 > Note:
 > ----------------------------
 > The app saves its data in the local browser cache. If you change browsers or profiles or clear the local cache, it won't find the saved data.
+
+[snippets](https://bcwalnja.github.io/snippets)
