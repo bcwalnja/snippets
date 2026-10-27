@@ -29,13 +29,20 @@ function createCard(id, title, content) {
 
     card.addEventListener("click", e => {
         if (!e.target.closest(".delete")) {
-            navigator.clipboard.writeText(content).catch(console.error);
+            navigator.clipboard.writeText(content).then(showToast).catch(console.error);
         }
     });
 
     return card;
 }
 
+
+function showToast() {
+    const toast = document.getElementById("toast");
+    toast.classList.remove("show");
+    void toast.offsetWidth; // restart the animation on rapid clicks
+    toast.classList.add("show");
+}
 
 function createTitle(title) {
     const titleElement = document.createElement("span");

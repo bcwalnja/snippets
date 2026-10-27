@@ -85,3 +85,29 @@ button {
         margin: 0;
     }
 }
+
+#toast {
+    position: fixed;
+    bottom: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 6px 14px;
+    border: 1px solid gray;
+    border-radius: 12px;
+    background: var(--bg);
+    color: var(--fg);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* 0.5s fade in, 2s hold, 1.25s fade out */
+#toast.show {
+    animation: toast 3.75s;
+}
+
+@keyframes toast {
+    0% { opacity: 0; }
+    13.33% { opacity: 1; }
+    66.67% { opacity: 1; }
+    100% { opacity: 0; }
+}
