@@ -105,6 +105,10 @@ document.getElementById("new-card-form").addEventListener("submit", e => {
     form.content.value = "";
 });
 
+const footer = document.querySelector("footer");
+document.getElementById("open-form").addEventListener("click", () => footer.classList.add("open"));
+document.getElementById("new-card-form").addEventListener("reset", () => footer.classList.remove("open"));
+
 function refreshCards() {
     const container = document.querySelector(".container");
     container.innerHTML = "";

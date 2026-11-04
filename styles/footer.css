@@ -24,16 +24,60 @@
 #new-card-form .title {
     flex: 1;
     min-width: min(10rem, 100%);
-    height: 3rem;
-    padding-bottom: calc(3rem - 1lh - 10px);
+    height: 3em;
+    padding-bottom: calc(3em - 1lh - 10px);
 }
 
 #new-card-form .content {
     flex: 2;
     min-width: min(15rem, 100%);
-    height: 3rem;
+    height: 3em;
 }
 
 #new-card-form button {
     width: max-content;
+}
+
+#open-form,
+#new-card-form .cancel {
+    display: none;
+}
+
+#open-form {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid gray;
+    border-radius: 50%;
+    background: var(--bg);
+    color: var(--fg);
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+@media (max-width: 400px) {
+    #open-form,
+    #new-card-form .cancel {
+        display: block;
+    }
+
+    footer.open #open-form,
+    footer:not(.open) #new-card-form {
+        display: none;
+    }
+
+    footer:not(.open) {
+        padding: 0;
+        border: none;
+    }
+
+    #new-card-form {
+        font-size: 0.85rem;
+    }
+
+    #new-card-form .content {
+        flex-basis: 100%;
+    }
 }
