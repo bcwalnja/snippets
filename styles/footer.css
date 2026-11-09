@@ -57,7 +57,7 @@
     line-height: 1;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 500px) {
     #open-form,
     #new-card-form .cancel {
         display: block;

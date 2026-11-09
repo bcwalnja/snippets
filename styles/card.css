@@ -61,9 +61,9 @@
     background: linear-gradient(to bottom, transparent, var(--bg));
 }
 
-@media (max-width: 450px) {
+@media (max-width: 500px) {
     .container {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(max(120px, 34%), 1fr));
         gap: 8px;
         padding: 8px;
     }
