@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Clock</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap">
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            background: #222;
+            color: #ddd;
+            font-family: 'Open Sans', Helvetica, sans-serif;
+        }
+
+        body {
+            box-sizing: border-box;
+            padding: 25vh 25vw;
+        }
+
+        #clock {
+            height: 100%;
+            container-type: size;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+        }
+
+        /* the time is ~4em wide and the whole clock is ~1.5em tall; scale by whichever side runs out first */
+        #time {
+            font-size: min(24cqw, 66cqh);
+            font-variant-numeric: tabular-nums;
+            line-height: 1.1;
+        }
+
+        #date {
+            font-size: min(6cqw, 16cqh);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="clock">
+        <div id="time"></div>
+        <div id="date"></div>
+    </div>
+
+    <script>
+        function render() {
+            const now = new Date();
+            document.getElementById("time").textContent = now.toLocaleTimeString([], { hour: "numeric", minute: "2-digit", hour12: true });
+            document.getElementById("date").textContent = now.toLocaleDateString([], {
+                weekday: "long", month: "long", day: "numeric", year: "numeric"
+            });
+        }
+
+        render();
+
+        // wait until the next minute starts, then tick once a minute
+        setTimeout(() => {
+            render();
+            setInterval(render, 60000);
+        }, 60000 - Date.now() % 60000);
+    </script>
+</body>
+
+</html>
