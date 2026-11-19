@@ -11,7 +11,7 @@ function createCard(id, title, content) {
 
     const titleEl = createTitle(title);
     const copyBtn = createCopyButton(content);
-    const deleteBtn = createDeleteButton(title, id);
+    const deleteBtn = id ? createDeleteButton(title, id) : createWebIcon();
 
     cardTitle.append(titleEl, copyBtn, deleteBtn);
     card.appendChild(cardTitle);
@@ -76,6 +76,38 @@ function createDeleteButton(title, id) {
     return deleteBtn;
 }
 
+function createWebIcon() {
+    const webIcon = document.createElement("span");
+    webIcon.textContent = "🌐";
+    return webIcon;
+}
+
+let webSnippets = [];
+
+async function loadWebCards() {
+    const sheetUrl = localStorage.getItem("sheetUrl");
+    if (!sheetUrl) return;
+    try {
+        const sheetId = sheetUrl.match(/\/d\/([\w-]+)/)[1];
+        const response = await fetch(`https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?headers=1`);
+        const text = await response.text();
+        const rows = JSON.parse(text.slice(text.indexOf("(") + 1, text.lastIndexOf(")"))).table.rows;
+        webSnippets = rows.map(row => ({ title: row.c[0]?.v, content: row.c[1]?.v }));
+        refreshCards();
+    } catch (error) {
+        console.error(error);
+        document.getElementById("web-error").hidden = false;
+    }
+}
+
+const webForm = document.getElementById("web-flyout");
+webForm.url.value = localStorage.getItem("sheetUrl");
+webForm.addEventListener("submit", e => {
+    e.preventDefault();
+    localStorage.setItem("sheetUrl", webForm.url.value.trim());
+    location.reload();
+});
+
 function loadCards() {
     if (JSON.parse(localStorage.getItem("snippets"))?.length === 0) {
         const message = "No snippets were found in the cache. Use the controls in the footer to add some.";
@@ -87,6 +119,7 @@ function loadCards() {
 }
 
 loadCards();
+loadWebCards();
 
 document.getElementById("new-card-form").addEventListener("submit", e => {
     e.preventDefault();
@@ -114,7 +147,7 @@ function refreshCards() {
     container.innerHTML = "";
     const cached = localStorage.getItem("snippets");
     const snippets = cached ? JSON.parse(cached) : [];
-    snippets.forEach(({ id, title, content }) => {
+    [...snippets, ...webSnippets].forEach(({ id, title, content }) => {
         const card = createCard(id, title, content);
         container.appendChild(card);
     });

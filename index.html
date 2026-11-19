@@ -41,6 +41,15 @@
         </div>
     </div>
     <div id="toast">Copied</div>
+    <div id="web">
+        <button type="button" id="web-error" popovertarget="web-error-flyout" hidden>i</button>
+        <button type="button" popovertarget="web-flyout">🌐</button>
+    </div>
+    <form id="web-flyout" popover>
+        <input name="url" placeholder="Google Sheet link" />
+        <button>Save</button>
+    </form>
+    <p id="web-error-flyout" popover>Couldn't load the Google Sheet. Check the link and make sure the sheet is shared as "Anyone with the link".</p>
     <script src="script.js"></script>
 </body>
 
