@@ -5,10 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Snippets</title>
-    <link rel="icon" type="image/png" sizes="48x48" href="icons/clip-48.png">
-    <link rel="stylesheet" href="./styles/styles.css">
-    <link rel="stylesheet" href="./styles/card.css">
-    <link rel="stylesheet" href="./styles/footer.css">
+    <link rel="icon" type="image/png" sizes="48x48" href="assets/icons/clip-48.png">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/layout.css">
+    <link rel="stylesheet" href="./css/card.css">
+    <link rel="stylesheet" href="./css/footer.css">
+    <link rel="stylesheet" href="./css/toast.css">
+    <link rel="stylesheet" href="./css/web.css">
 </head>
 
 <body>
@@ -42,15 +45,21 @@
     </div>
     <div id="toast">Copied</div>
     <div id="web">
-        <button type="button" id="web-error" popovertarget="web-error-flyout" hidden>i</button>
-        <button type="button" popovertarget="web-flyout">🌐</button>
+        <button type="button" id="web-error" popovertarget="web-error-flyout" hidden><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><path d="M12 11v6M12 7v.01" /></svg></button>
+        <button type="button" id="web-button" popovertarget="web-flyout"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><path d="M2 12h20M12 2a15 15 0 0 1 0 20a15 15 0 0 1 0-20" /></svg></button>
+        <a id="web-link" target="_blank" title="Open Google Sheet" hidden><svg viewBox="0 0 24 24"><path d="M10 3H3v18h18v-7M15 3h6v6M21 3l-10 10" /></svg></a>
     </div>
     <form id="web-flyout" popover>
         <input name="url" placeholder="Google Sheet link" />
         <button>Save</button>
     </form>
     <p id="web-error-flyout" popover>Couldn't load the Google Sheet. Check the link and make sure the sheet is shared as "Anyone with the link".</p>
-    <script src="script.js"></script>
+    <script src="js/card-parts.js"></script>
+    <script src="js/card.js"></script>
+    <script src="js/cards.js"></script>
+    <script src="js/sheet.js"></script>
+    <script src="js/new-card-form.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
